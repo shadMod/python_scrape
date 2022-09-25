@@ -1,4 +1,4 @@
-# Python scrape
+# Python Scrape
 
 A simple feature to scrape website.
 
