@@ -14,7 +14,6 @@ clean = ["<p>", "</p>"]
 pathurl = []
 for url in pathurl:
     scrape_text(url, "div", class_="mw-parser-output", tag="p", clean=clean)
-
 """
 
 
