@@ -1,3 +1,10 @@
+def get_url_href(link: str):
+    # get first link href in <a>
+    for text in link.split(" "):
+        if "href" in text:
+            return text.replace("href=", "").replace("'", "").replace('"', "")
+
+
 def clean_text(text: str):
     clean_txt = ["[", "]", "'"]
     for char in clean_txt:
