@@ -1,3 +1,13 @@
+from urllib.parse import unquote
+
+
+def unquote_try(value: str):
+    try:
+        return unquote(value, errors='strict')
+    except UnicodeDecodeError:
+        return unquote(value, encoding='latin-1')
+
+
 def get_url_href(link: str):
     # get first link href in <a>
     for text in link.split(" "):
@@ -32,3 +42,22 @@ def clean_a_href(text: str, capo: bool = False):
         return "".join(txt_clean).capitalize()
     # return clean text
     return "".join(txt_clean)
+
+
+def get_html_text(value: str, tag: str, clean_a: bool = False):
+    """
+    Support tag:
+        - `<a href=""></a>`
+        - `<b></b>`
+
+    :result:    res
+    :rtype:     str
+    """
+    for text in value.split("><"):
+        if tag == "href" and tag in text:
+            res = clean_a_href(text).replace("/a", "") if clean_a else text
+            return res
+        if tag == "<b>" and tag in text:
+            pass
+
+    return ""
