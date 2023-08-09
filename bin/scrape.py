@@ -18,7 +18,8 @@ for url in pathurl:
 
 
 def scrape_text(
-        url, content, id_=None, class_=None, name_=None, tag=None, clean=False, content_nr: int = 0
+        url, content, id_=None, class_=None, name_=None, tag=None, clean=False, content_nr: int = 0,
+        ret_type: str = "str",
 ):
     """
     content => str: tag that conțains the desired values (big container)
@@ -57,4 +58,9 @@ def scrape_text(
         else:
             return soup_tag
 
-    return str(soup.findAll(tag, attrs=attrs))
+    if ret_type == "str":
+        return str(soup.findAll(tag, attrs=attrs))
+    elif ret_type == "list":
+        return list(soup.findAll(tag, attrs=attrs))
+    else:
+        return str(soup.findAll(tag, attrs=attrs))
